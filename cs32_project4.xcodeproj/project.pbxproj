@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E3BFC9E27D741BE0005A644 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFC9D27D741BE0005A644 /* main.cpp */; };
+		8E3BFCA827D741CE0005A644 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCA527D741CE0005A644 /* main.cpp */; };
+		8E3BFCAB27D742580005A644 /* PersonProfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCA927D742580005A644 /* PersonProfile.cpp */; };
+		8E3BFCB027D742910005A644 /* AttributeTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCAE27D742910005A644 /* AttributeTranslator.cpp */; };
+		8E3BFCB327D742A10005A644 /* MemberDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCB127D742A10005A644 /* MemberDatabase.cpp */; };
+		8E3BFCB627D742B10005A644 /* MatchMaker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCB427D742B10005A644 /* MatchMaker.cpp */; };
+		8E3BFCBE27D74DA50005A644 /* utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E3BFCBD27D74DA50005A644 /* utility.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +29,20 @@
 
 /* Begin PBXFileReference section */
 		8E3BFC9A27D741BE0005A644 /* cs32_project4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cs32_project4; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E3BFC9D27D741BE0005A644 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8E3BFCA427D741CE0005A644 /* provided.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = provided.h; path = ../../../../Downloads/Unhinged/provided.h; sourceTree = "<group>"; };
+		8E3BFCA527D741CE0005A644 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../Downloads/Unhinged/main.cpp; sourceTree = "<group>"; };
+		8E3BFCA627D741CE0005A644 /* translator.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = translator.txt; path = ../../../../Downloads/Unhinged/translator.txt; sourceTree = "<group>"; };
+		8E3BFCA727D741CE0005A644 /* members.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = members.txt; path = ../../../../Downloads/Unhinged/members.txt; sourceTree = "<group>"; };
+		8E3BFCA927D742580005A644 /* PersonProfile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PersonProfile.cpp; sourceTree = "<group>"; };
+		8E3BFCAE27D742910005A644 /* AttributeTranslator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AttributeTranslator.cpp; sourceTree = "<group>"; };
+		8E3BFCB127D742A10005A644 /* MemberDatabase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemberDatabase.cpp; sourceTree = "<group>"; };
+		8E3BFCB427D742B10005A644 /* MatchMaker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MatchMaker.cpp; sourceTree = "<group>"; };
+		8E3BFCB827D7433B0005A644 /* AttributeTranslator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttributeTranslator.h; sourceTree = "<group>"; };
+		8E3BFCB927D7434E0005A644 /* PersonProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonProfile.h; sourceTree = "<group>"; };
+		8E3BFCBA27D7435F0005A644 /* MemberDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberDatabase.h; sourceTree = "<group>"; };
+		8E3BFCBB27D7436E0005A644 /* MatchMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchMaker.h; sourceTree = "<group>"; };
+		8E3BFCBC27D7437C0005A644 /* RadixTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadixTree.h; sourceTree = "<group>"; };
+		8E3BFCBD27D74DA50005A644 /* utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +75,20 @@
 		8E3BFC9C27D741BE0005A644 /* cs32_project4 */ = {
 			isa = PBXGroup;
 			children = (
-				8E3BFC9D27D741BE0005A644 /* main.cpp */,
+				8E3BFCA527D741CE0005A644 /* main.cpp */,
+				8E3BFCB927D7434E0005A644 /* PersonProfile.h */,
+				8E3BFCA927D742580005A644 /* PersonProfile.cpp */,
+				8E3BFCB827D7433B0005A644 /* AttributeTranslator.h */,
+				8E3BFCAE27D742910005A644 /* AttributeTranslator.cpp */,
+				8E3BFCBA27D7435F0005A644 /* MemberDatabase.h */,
+				8E3BFCB127D742A10005A644 /* MemberDatabase.cpp */,
+				8E3BFCBB27D7436E0005A644 /* MatchMaker.h */,
+				8E3BFCB427D742B10005A644 /* MatchMaker.cpp */,
+				8E3BFCBC27D7437C0005A644 /* RadixTree.h */,
+				8E3BFCA727D741CE0005A644 /* members.txt */,
+				8E3BFCA427D741CE0005A644 /* provided.h */,
+				8E3BFCA627D741CE0005A644 /* translator.txt */,
+				8E3BFCBD27D74DA50005A644 /* utility.cpp */,
 			);
 			path = cs32_project4;
 			sourceTree = "<group>";
@@ -119,7 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E3BFC9E27D741BE0005A644 /* main.cpp in Sources */,
+				8E3BFCBE27D74DA50005A644 /* utility.cpp in Sources */,
+				8E3BFCB327D742A10005A644 /* MemberDatabase.cpp in Sources */,
+				8E3BFCB027D742910005A644 /* AttributeTranslator.cpp in Sources */,
+				8E3BFCB627D742B10005A644 /* MatchMaker.cpp in Sources */,
+				8E3BFCAB27D742580005A644 /* PersonProfile.cpp in Sources */,
+				8E3BFCA827D741CE0005A644 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
