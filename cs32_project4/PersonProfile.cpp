@@ -35,18 +35,21 @@ bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const
 /*The AddAttValPair method is used to add a new attribute-value pair to the member’s profile. If the person’s profile already has an attribute-value pair with the same attribute and value as the attval parameter, then this method should do nothing. More than one attribute-value pair in the map can have the same attribute, as long as their corresponding values are different. We place no requirements on the order that you must store your attribute-value pairs.*/
 void PersonProfile::AddAttValPair(const AttValPair& attval)
 {
+    cerr << "adding" << endl;
     bool ifAdded = false;
     
     //see if the key is already in the radix tree
     set<string>* values = attValPairs.search(attval.attribute);
     if(values == nullptr)
     {
+        cerr << "making new " << endl;
         //if it's not, create a new string set to hold the values
         set<string> newValues;
         newValues.insert(attval.value);
         
         //insert the key and map the string of values to the key (attribute)
         attValPairs.insert(attval.attribute, newValues);
+        ifAdded = true;
     }
     else
     {
@@ -67,6 +70,7 @@ void PersonProfile::AddAttValPair(const AttValPair& attval)
     if(ifAdded)
     {
         //if it added it, add to the vector of attvalue apirs
+        cerr << "push" << endl;
         allAtts.push_back(attval);
     }
 }

@@ -41,7 +41,7 @@
 		8E3BFCB927D7434E0005A644 /* PersonProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonProfile.h; sourceTree = "<group>"; };
 		8E3BFCBA27D7435F0005A644 /* MemberDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberDatabase.h; sourceTree = "<group>"; };
 		8E3BFCBB27D7436E0005A644 /* MatchMaker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchMaker.h; sourceTree = "<group>"; };
-		8E3BFCBC27D7437C0005A644 /* RadixTree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RadixTree.h; sourceTree = "<group>"; };
+		8E3BFCBC27D7437C0005A644 /* RadixTree.h */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.c.h; path = RadixTree.h; sourceTree = "<group>"; };
 		8E3BFCBD27D74DA50005A644 /* utility.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = utility.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

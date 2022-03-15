@@ -10,21 +10,45 @@ bool AttributeTranslator::Load(string filename)
     //notes:
     //source attribute and source value are the key
     //set of "compatible attribute,compatible value" strings (in that format) are the value type
+    string line = "";
     
     //load in file
-    //note: check lecture for steps
+    ifstream translations;
+    translations.open(filename);
+    if(!(translations.is_open()))
+    {
+        return false;
+    }
     
-    //create string for the source attribute,source value
-    //create string for compatible attribute,compatible value
-    
-    //search if the source attribute,source value is in the tree
-    
-    //if not, create set for compatible attributes/values
-    //insert into tree
-    
-    //if it is there
-    //retrieve the compatible attributes/values set using search
-    //add the compatible attribute/value to the set
+    while(getline(translations, line))
+    {
+        //create string for the source attribute,source value
+        string holdLine = line;
+        string source = createStrings(holdLine);
+        
+        //create string for compatible attribute,compatible value
+        string compatible = holdLine;
+        
+        //search if the source attribute,source value is in the tree
+        set<string>* searchPairs = compPairs.search(source);
+        
+        //if not, create set for compatible attributes/values
+        //insert into tree
+        if(searchPairs == nullptr)
+        {
+            set<string> pairs;
+            pairs.insert(compatible);
+            compPairs.insert(source, pairs);
+        }
+        else
+        {
+            //if it is there
+            //retrieve the compatible attributes/values set using search
+            //add the compatible attribute/value to the set
+            (*searchPairs).insert(compatible);
+        }
+    }
+    translations.close();
     
     return true;
 }
@@ -37,13 +61,73 @@ vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPa
     vector<AttValPair> foundPairs;
     
     //create a string for the source attribute,source value
+    string holdPair = "";
+    holdPair += source.attribute;
+    holdPair += ",";
+    holdPair += source.value;
     
     //search the radixtree for the key
+    set<string>* pairs = compPairs.search(holdPair);
     
-    //if the key isn't found, return an empty vector (foundPairs)
+    set<string>::iterator it;
     
-    //otherwise, if the key is found, create attvalpairs for each element in the set
-    //insert the attvalpairs into vector foundPairs
+    if(pairs == nullptr)
+    {
+        //if the key isn't found, return an empty vector (foundPairs)
+        return foundPairs;
+    }
+    else
+    {
+        //otherwise, if the key is found, create attvalpairs for each element in the set
+        //insert the attvalpairs into vector foundPairs
+        it = (*pairs).begin();
+        while(it != (*pairs).end())
+        {
+            string attval = *it;
+            int comma = int(attval.find_first_of(","));
+            string attribute = attval.substr(0,comma);
+            string val = attval.substr(comma+1);
+            it++;
+            AttValPair newPair(attribute, val);
+            foundPairs.push_back(newPair);
+        }
+        
+        return foundPairs;
+    }
+}
+
+string AttributeTranslator::createStrings(string& line)
+{
+    string source = "";
+    string holdLine = line;
+    int comma = int(holdLine.find_first_of(","));
+    source += holdLine.substr(0, comma) + ",";
+    holdLine = holdLine.substr(comma+1);
+    comma = int(holdLine.find_first_of(","));
+    source += holdLine.substr(0, comma);
+    holdLine = holdLine.substr(comma+1);
+    line = holdLine;
     
-    return foundPairs;
+    return source;
+}
+
+void AttributeTranslator::printPairs(string key)
+{
+    set<string>* pairs = compPairs.search(key);
+    
+    set<string>::iterator it;
+    
+    if(pairs == nullptr)
+    {
+        cout << "not found" << endl;
+    }
+    else
+    {
+        it = (*pairs).begin();
+        while(it != (*pairs).end())
+        {
+            cout << *it << endl;
+            it++;
+        }
+    }
 }

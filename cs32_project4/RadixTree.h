@@ -21,10 +21,11 @@ public:
     };
     ~RadixTree()
     {
+         //use recursion - make helper function to delete nodes
+         deleteNodes(root);
+         
         //delete root node
         delete root;
-        
-        //use recursion - make helper function to delete nodes
     };
     void insert(string key, const ValueType& value);
     ValueType* search(string key) const;
@@ -58,6 +59,7 @@ private:
     
     //helper functions
     bool lookup(RadixTreeNode*& node, string& key) const;
+     void deleteNodes(RadixTreeNode* iterator);
 };
 
 template <typename ValueType>
@@ -67,29 +69,49 @@ void RadixTree<ValueType>::insert(string key, const ValueType& value)
     string keyCopy = key;
     
     int letter = key[0] - 'a';
-    
+     
     if((*searcher).edges[letter] == nullptr)
     {
-        cout << "inserting" << endl;
         RadixTreeNode* newNode = new RadixTreeNode(key, value);
+        (*newNode).parent = searcher;
         (*searcher).edges[letter] = newNode;
     }
     else
     {
         searcher = (*searcher).edges[letter];
-        
+         bool ifInTree = lookup(searcher, keyCopy);
+         int prefixLength = int(keyCopy.length());
+         
         //if returns true, the key is in the tree
-        if(lookup(searcher, keyCopy))
+        if(ifInTree == true)
         {
-            cout << "not inserting" << endl;
             (*searcher).value = value;
+        }
+        else if(keyCopy == (*searcher).word.substr(0,prefixLength))
+        {
+            //means key is not in tree but may also be a potential prefix
+            string rest = (*searcher).word.substr(prefixLength);
+            
+            //must switch prefix's places with searcher
+            letter = rest[0] - 'a';
+             int holdLetter2 = keyCopy[0] - 'a';
+            RadixTreeNode* newNode = new RadixTreeNode(keyCopy, value);
+             (*searcher).parent->edges[holdLetter2] = newNode;
+            (*newNode).parent = (*searcher).parent;
+            (*newNode).endOfWord = false;
+             (*newNode).edges[letter] = searcher;
+             
+             (*searcher).parent = newNode;
+             (*searcher).word = rest;
+             (*searcher).endOfWord = true;
         }
         else
         {
-            cout << "inserting" << endl;
-            //if it returns false, the whole key is not in the tree
+            //means key is not in tree + key does not have potential prefix - insert as usual
             letter = keyCopy[0] - 'a';
             RadixTreeNode* newNode = new RadixTreeNode(keyCopy, value);
+            (*newNode).parent = searcher;
+            (*searcher).endOfWord = false;
             (*searcher).edges[letter] = newNode;
         }
     }
@@ -108,23 +130,21 @@ ValueType* RadixTree<ValueType>::search(string key) const
     
     if((*searcher).edges[letter] == nullptr)
     {
-        cout << "not found" << endl;
         return nullptr;
     }
     else
     {
         searcher = (*searcher).edges[letter];
+         bool ifInTree = lookup(searcher, keyCopy);
         
         //if returns true, the key is in the tree
-        if(lookup(searcher, keyCopy))
+        if(ifInTree)
         {
-            cout << "found" << endl;
             ValueType* hold = &((*searcher).value);
             return hold;
         }
         else
         {
-            cout << "not found" << endl;
             //if returns false, the key is not in the tree
             return nullptr;
         }
@@ -138,12 +158,13 @@ ValueType* RadixTree<ValueType>::search(string key) const
 template <typename ValueType>
 bool RadixTree<ValueType>::lookup(RadixTreeNode*& node, string& key) const
 {
-    //note: since trie, trying to find node whose prefix matches the key's prefix
+    //note: since tree, trying to find node whose prefix matches the key's prefix
     RadixTreeNode* current = node;
     int letter = key[0] - 'a';
     string prefix = "";
     string curWord = "";
     int endpoint = 0;
+    
     
     while(endpoint < key.length() || endpoint < (*current).word.length())
     {
@@ -159,15 +180,22 @@ bool RadixTree<ValueType>::lookup(RadixTreeNode*& node, string& key) const
             endpoint++;
         }
     }
-    
-    if((endpoint == key.length() || endpoint == (*current).word.length()) && prefix == curWord)
-    {
-        //if reached end of one of the words and they are equal/same word
-        cout << prefix << " this way" << endl;
-        return true;
-    }
-    else if(prefix == curWord)
-    {
+     
+          if(prefix.length() < (*node).word.length())
+          {
+               //means it is a prefix
+               node = current;
+               return false;
+          }
+     
+        if(endpoint == key.length())
+        {
+            //if reached end of one of the words and they are equal/same word
+             key = prefix;
+             node = current;
+            return true;
+        }
+        
         //check edges
         //if the pointer at the int of the array is nullptr, return the current radixtreenode
         //if not, go to the radixtreenode that is held in the array
@@ -175,20 +203,36 @@ bool RadixTree<ValueType>::lookup(RadixTreeNode*& node, string& key) const
         if((*current).edges[letter] == nullptr)
         {
             //means have same prefix, and there is an empty spot for the rest of the word
+             key = key.substr(endpoint);
             return false;
         }
         else
         {
             key = key.substr(endpoint);
             current = (*current).edges[letter];
-            return lookup(current, key);
+             bool res = lookup(current, key);
+             node = current;
+             return res;
         }
-    }
-    else
-    {
-        //reached the end of one of the words and they are not same word
-        return false;
-    }
+}
+
+
+template <typename ValueType>
+void RadixTree<ValueType>::deleteNodes(RadixTreeNode* iterator)
+{
+     if(iterator == nullptr)
+     {
+          return;
+     }
+     
+     for(int i = 0; i < 128; i++)
+     {
+          deleteNodes((*iterator).edges[i]);
+          
+          RadixTreeNode* deletor = (*iterator).edges[i];
+          delete deletor;
+     }
 }
 
 #endif /* RadixTree_h */
+
